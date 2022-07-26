@@ -39,9 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'musicapp',
     'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', 
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -71,6 +74,32 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'musicproj.wsgi.application'
 
+
+
+REST_FRAMEWORK = {
+'DEFAULT_RENDERER_CLASSES': (
+'djangorestframework_camel_case.render.CamelCaseJSONRenderer', 
+'djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer',
+),
+'DEFAULT_PARSER_CLASSES': (
+'djangorestframework_camel_case.parser.CamelCaseFormParser', 
+'djangorestframework_camel_case.parser.CamelCaseMultiPartParser',
+'djangorestframework_camel_case.parser.CamelCaseJSONParser',
+),
+}
+
+CORS_ORIGIN_WHITELIST = (
+"http://localhost:3000",
+)
+
+CORS_ALLOW_METHODS = [
+'DELETE',
+'GET',
+'OPTIONS',
+'PATCH',
+'POST',
+'PUT',
+]
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
